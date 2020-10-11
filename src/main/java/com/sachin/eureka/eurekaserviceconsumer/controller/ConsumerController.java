@@ -20,11 +20,18 @@ public class ConsumerController {
 
     @RequestMapping(value = "/ribbon-consumer", method = RequestMethod.GET)
     public String helloConsumer() {
-
         //使用RestTemplate时采用了服务名作为host
         String body = restTemplate.getForEntity("http://hello-service/hello", String.class).getBody();
         return body;
 
 
+    }
+
+    @RequestMapping(value = "/testError")
+    public String testError() {
+
+        if (true)
+            throw new RuntimeException();
+        return "testError";
     }
 }
